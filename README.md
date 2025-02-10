@@ -187,9 +187,13 @@ axios.post(ENDPOINT_URL, { instances: [{ image: { content: imageBase64 } }] }, {
 | localhost refused to connect  |  Try a different port (e.g., 5000 instead of 8080). |   
 |NXDOMAIN (DNS error) | Use the correct dedicated endpoint URL from gcloud ai endpoints describe YOUR_ENDPOINT_ID.
 
-Google Cloud Storage
+📚 Additional Resources
 
-OAuth 2.0 Setup
+[Google Cloud Vertex AI Docs](https://cloud.google.com/vertex-ai/docs)
+
+[Google Cloud Storage](https://cloud.google.com/storage/docs/)
+
+[OAuth 2.0 Setup](https://developers.google.com/identity/protocols/oauth2)
 
 🚀 Contributing
 We welcome contributions! Feel free to submit issues or pull requests.
