@@ -121,7 +121,10 @@ gcloud ai custom-jobs create --region=us-central1 --display-name=car-automl-trai
 
 #### 2️⃣ Deploy the Model to an Endpoint
 
+```
 gcloud ai endpoints create --display-name=car-endpoint --region=us-central1
+```
+
 ✔ Deploys the trained model to an endpoint for predictions.
 
 ### 🤖 Making Predictions
