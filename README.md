@@ -5,16 +5,16 @@ Vertex AI AutoML Vision Guide
 Welcome to the Vertex AI AutoML Vision Guide! This repository provides a step-by-step guide for setting up Google Cloud, Vertex AI, AutoML training, making predictions, and troubleshooting. It includes detailed setup instructions for both code-side (Node.js) and Google Cloud-side configurations.
 
 ## **📌 Table of Contents**
-- [🚀 Prerequisites](#prerequisites)
-- [🛠️ Google Cloud Setup](#google-cloud-setup)
-- [💻 Code Setup](#code-setup)
-- [🔧 Vertex AI AutoML Training](#vertex-ai-automl-training)
-- [🤖 Making Predictions](#making-predictions)
-- [🛑 Troubleshooting](#troubleshooting)
-- [📚 Additional Resources](#additional-resources)
 
+- [🚀 Prerequisites](#🚀-prerequisites)
+- [🛠️ Google Cloud Setup](#🛠️-google-cloud-setup)
+- [💻 Code Setup](#💻-code-setup)
+- [🔧 Vertex AI AutoML Training](#🔧-vertex-ai-automl-training)
+- [🤖 Making Predictions](#🤖-making-predictions)
+- [🛑 Troubleshooting](#🛑-troubleshooting)
+- [📚 Additional Resources](#📚-additional-resources)
 
-### 🚀 Prerequisites
+## 🚀 Prerequisites
 
 #### 1️⃣ Google Cloud Account & Project
 
@@ -44,7 +44,7 @@ Postman (optional:for manual API testing): [Install from postman.com](https://ww
 
 #### 1️⃣ Create a Google Cloud Storage (GCS) Bucket
 
-``` 
+```
 gsutil mb -l us-central1 gs://your-bucket-name/
 ```
 
@@ -52,18 +52,18 @@ gsutil mb -l us-central1 gs://your-bucket-name/
 
 #### 2️⃣ Create a Vertex AI Dataset
 
-``` 
+```
 gcloud ai datasets create --display-name=car-dataset --metadata-schema-uri=gs://google-cloud-aiplatform/schema/dataset/metadata/image_1.0.0.yaml --region=us-central1
- ```
+```
 
-✔ This dataset will be used for training AutoML models. 
+✔ This dataset will be used for training AutoML models.
 
-#### 3️⃣ Upload Images to GCS: 
+#### 3️⃣ Upload Images to GCS:
 
-✔ To see the list of your storage buckets >> [google cloud buckets](https://console.cloud.google.com/storage/browser?project=caramel-day-448720-c7&prefix=&forceOnBucketsSortingFiltering=true) 
+✔ To see the list of your storage buckets >> [google cloud buckets](https://console.cloud.google.com/storage/browser?project=caramel-day-448720-c7&prefix=&forceOnBucketsSortingFiltering=true)
 
-``` 
-gsutil cp -r /local-image-folder gs://your-bucket-name/ 
+```
+gsutil cp -r /local-image-folder gs://your-bucket-name/
 ```
 
 ✔ Uploads images for training.
@@ -73,22 +73,21 @@ gsutil cp -r /local-image-folder gs://your-bucket-name/
 Ensure your CSV is in the following format:
 
 ```
- gs://your-bucket-name/images/car1.jpg,car 
- ```
+ gs://your-bucket-name/images/car1.jpg,car
+```
 
 Upload it to GCS:
 
-``` 
-gsutil cp training-dataset.csv gs://your-bucket-name/ 
 ```
-
+gsutil cp training-dataset.csv gs://your-bucket-name/
+```
 
 #### 💻 Code Setup
 
 #### 1️⃣ Clone the Repository
 
-``` 
-git clone https://github.com/your-username/vertex-ai-vision.git 
+```
+git clone https://github.com/your-username/vertex-ai-vision.git
 
 cd vertex-ai-vision
 
@@ -96,14 +95,14 @@ cd vertex-ai-vision
 
 2️⃣ Install Dependencies
 
-``` 
-npm install google-auth-library axios fs csv-parser open 
+```
+npm install google-auth-library axios fs csv-parser open
 ```
 
 3️⃣ Set Up OAuth 2.0 Credentials
 
-- Go to Google 
-[Cloud Console → Credentials](https://console.cloud.google.com/apis/credentials?project=caramel-day-448720-c7)
+- Go to Google
+  [Cloud Console → Credentials](https://console.cloud.google.com/apis/credentials?project=caramel-day-448720-c7)
 
 - Create OAuth 2.0 Client ID for Web Application
 
@@ -113,8 +112,8 @@ npm install google-auth-library axios fs csv-parser open
 
 #### 1️⃣ Train an AutoML Model
 
-``` 
-gcloud ai custom-jobs create --region=us-central1 --display-name=car-automl-training --dataset-id=YOUR_DATASET_ID 
+```
+gcloud ai custom-jobs create --region=us-central1 --display-name=car-automl-training --dataset-id=YOUR_DATASET_ID
 ```
 
 ✔ This command starts training your AutoML Vision model.
@@ -133,8 +132,8 @@ gcloud ai endpoints create --display-name=car-endpoint --region=us-central1
 
 Get an OAuth Token
 
-``` 
-gcloud auth print-access-token 
+```
+gcloud auth print-access-token
 ```
 
 Set Up Postman Request:
@@ -148,13 +147,14 @@ https://us-central1-aiplatform.googleapis.com/v1/projects/YOUR_PROJECT_ID/locati
 
 Headers:
 
- Authorization: Bearer YOUR_ACCESS_TOKEN 
+ Authorization: Bearer YOUR_ACCESS_TOKEN
 
 Content-Type: application/json
 ```
 
 Body (Example for GCS Image Prediction):
-``` 
+
+```
 {
   "instances": [{ "image": { "gcsUri": "gs://your-bucket-name/test-image.jpg" } }]
 }
@@ -175,22 +175,21 @@ axios.post(ENDPOINT_URL, { instances: [{ image: { content: imageBase64 } }] }, {
 });
 
 ```
+
 ✔ Option 2: Run the script on node:
 
-``` node predict.js ```
+`node predict.js`
 
+## 🛑 Troubleshooting
 
-🛑 Troubleshooting
+| Issue                        | Fix                                                                                        |
+| ---------------------------- | ------------------------------------------------------------------------------------------ |
+| 403 Permission Denied        | Ensure IAM roles roles/aiplatform.user and roles/iam.serviceAccountUser are assigned.      |
+| url redirect_uri_mismatch    | Add http://localhost:5000 in Google Cloud Console → Credentials.                           |
+| localhost refused to connect | Try a different port (e.g., 5000 instead of 8080).                                         |
+| NXDOMAIN (DNS error)         | Use the correct dedicated endpoint URL from gcloud ai endpoints describe YOUR_ENDPOINT_ID. |
 
-
-| Issue  | Fix  |   
-|---|---|
-| 403 Permission Denied  | Ensure IAM roles roles/aiplatform.user and roles/iam.serviceAccountUser are assigned.  |   
-| url redirect_uri_mismatch  |  Add http://localhost:5000 in Google Cloud Console → Credentials. |   
-| localhost refused to connect  |  Try a different port (e.g., 5000 instead of 8080). |   
-|NXDOMAIN (DNS error) | Use the correct dedicated endpoint URL from gcloud ai endpoints describe YOUR_ENDPOINT_ID.
-
-📚 Additional Resources
+## 📚 Additional Resources
 
 [Google Cloud Vertex AI Docs](https://cloud.google.com/vertex-ai/docs)
 
@@ -202,7 +201,5 @@ axios.post(ENDPOINT_URL, { instances: [{ image: { content: imageBase64 } }] }, {
 We welcome contributions! Feel free to submit issues or pull requests.
 
 ⭐ Star this repository if you found it useful!
-
-
 
 
