@@ -3,20 +3,15 @@ Vertex AI AutoML Vision Guide
 
 Welcome to the Vertex AI AutoML Vision Guide! This repository provides a step-by-step guide for setting up Google Cloud, Vertex AI, AutoML training, making predictions, and troubleshooting. It includes detailed setup instructions for both code-side (Node.js) and Google Cloud-side configurations.
 
-📌 Table of Contents
-🚀 Prerequisites
+## **📌 Table of Contents**
+- [🚀 Prerequisites](#-prerequisites)
+- [🛠️ Google Cloud Setup](#-google-cloud-setup)
+- [💻 Code Setup](#-code-setup)
+- [🔧 Vertex AI AutoML Training](#-vertex-ai-automl-training)
+- [🤖 Making Predictions](#-making-predictions)
+- [🛑 Troubleshooting](#-troubleshooting)
+- [📚 Additional Resources](#-additional-resources)
 
-🛠️ Google Cloud Setup
-
-💻 Code Setup
-
-🔧 Vertex AI AutoML Training
-
-🤖 Making Predictions
-
-🛑 Troubleshooting
-
-📚 Additional Resources
 
 🚀 Prerequisites
 1️⃣ Google Cloud Account & Project
