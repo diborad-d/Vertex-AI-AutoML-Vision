@@ -126,7 +126,7 @@ gcloud ai endpoints create --display-name=car-endpoint --region=us-central1
 
 ### 🤖 Making Predictions
 
-Option 1: Using Postman
+✔ Option 1: Using Postman
 
 Get an OAuth Token
 
@@ -172,19 +172,20 @@ axios.post(ENDPOINT_URL, { instances: [{ image: { content: imageBase64 } }] }, {
 });
 
 ```
-✔ Run the script:
+✔ Option 2: Run the script on node:
 
 ``` node predict.js ```
 
+
 🛑 Troubleshooting
 
-Issue	Fix
-403 Permission Denied	Ensure IAM roles roles/aiplatform.user and roles/iam.serviceAccountUser are assigned
-redirect_uri_mismatch	Add http://localhost:5000 in Google Cloud Console → Credentials
-localhost refused to connect	Try a different port (e.g., 5000 instead of 8080)
-NXDOMAIN (DNS error)	Use the correct dedicated endpoint URL from gcloud ai endpoints describe YOUR_ENDPOINT_ID
-📚 Additional Resources
-Google Cloud Vertex AI Docs
+
+| Issue  | Fix  |   
+|---|---|
+| 403 Permission Denied  | Ensure IAM roles roles/aiplatform.user and roles/iam.serviceAccountUser are assigned.  |   
+| url redirect_uri_mismatch  |  Add http://localhost:5000 in Google Cloud Console → Credentials. |   
+| localhost refused to connect  |  Try a different port (e.g., 5000 instead of 8080). |   
+|NXDOMAIN (DNS error) | Use the correct dedicated endpoint URL from gcloud ai endpoints describe YOUR_ENDPOINT_ID.
 
 Google Cloud Storage
 
@@ -194,6 +195,7 @@ OAuth 2.0 Setup
 We welcome contributions! Feel free to submit issues or pull requests.
 
 ⭐ Star this repository if you found it useful!
+
 
 
 
